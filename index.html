@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Hello, World!</title>
+</head>
+<body>
+  <h1>
+    Hello, World!
+  </h1>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jhaji Coaching Institute</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+ background-attachment: fixed;
+ color: #333;
+}
+header{
+ background: rgba(0, 0, 0, 0.8);
+ color: #f39c12; padding: 60px 20px; text-align: center;
+ border-bottom: 5px solid #f39c12;
+ backdrop-filter: blur(10px);
+}
+header h1{ margin:0; font-size: 3rem; text-transform: uppercase; letter-spacing: 2px; }
+header p{ color: white; font-size: 1.2rem; margin-top: 10px; }
+
+.container{max-width:1100px; margin:auto; padding:20px}
+.section{
+ background: rgba(255, 255, 255, 0.98);
+ padding: 35px; margin-bottom: 30px;
+ border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+h2{color: #0b1c2d; border-left: 6px solid #f39c12; padding-left: 15px; margin-bottom: 25px;}
+
+/* Contact Section */
+.contact-bar {
+ background: #f39c12; color: #000; padding: 15px;
+ text-align: center; font-weight: bold; border-radius: 10px;
+ margin-bottom: 20px; font-size: 1.2rem;
+}
+
+/* Subjects Grid */
+.subjects-grid {
+ display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+ gap: 15px; margin-top: 20px;
+}
+.subject-card {
+ background: #eef2f7; padding: 20px; border-radius: 12px;
+ text-align: center; border: 1px solid #ddd; font-weight: bold;
+ color: #2c3e50; transition: 0.3s;
+}
+.subject-card:hover { background: #f39c12; color: white; transform: scale(1.05); }
+
+/* Fees & Payment */
+.fees{display: flex; gap: 20px; flex-wrap: wrap;}
+.fee-box{
+ flex: 1; background: #fff; padding: 25px;
+ border-radius: 15px; text-align: center; border: 2px solid #f39c12;
+}
+.price{ font-size: 2.2rem; font-weight: bold; color: #27ae60; margin: 10px 0; }
+
+input, select, button, textarea {
+ width: 100%; padding: 15px; margin: 10px 0;
+ border-radius: 10px; border: 1px solid #ccc; font-size: 16px;
+}
+button {
+ background: #0b1c2d; color: white; border: none; 
+ cursor: pointer; font-weight: bold; transition: 0.3s;
+}
+button:hover { background: #f39c12; color: #000; }
+
+.payment-info {
+ background: #d4edda; padding: 20px; border-radius: 10px;
+ text-align: center; font-size: 1.5rem; font-weight: bold; margin: 15px 0;
+}
+
+/* Admin Panel */
+.admin-panel{display: none; border: 3px dashed #e74c3c; background: #fff5f5;}
+table{width: 100%; border-collapse: collapse; margin-top: 15px;}
+th, td{border: 1px solid #ddd; padding: 12px; text-align: left;}
+th{background: #0b1c2d; color: white;}
+
+footer{background: #000; color: white; text-align: center; padding: 40px; margin-top: 50px;}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1 id="siteName">Jhaji Coaching Institute</h1>
+    <p id="location">Bounsi, Bihar – Banka, Bihar</p>
+</header>
+
+<div class="container">
+
+    <div class="contact-bar">
+        📞 Admission Helpline: +91 7319965930
+    </div>
+
+    <div class="section">
+        <h2>Expertise in Subjects</h2>
+        <div id="subjectsDisplay" class="subjects-grid">
+            </div>
+    </div>
+
+    <div class="section">
+        <h2>Fees & Packages</h2>
+        <div class="fees">
+            <div class="fee-box">
+                <h3>Monthly Plan</h3>
+                <div class="price">₹ 3500</div>
+                <p>Detailed Concept Clearing</p>
+            </div>
+            <div class="fee-box">
+                <h3>Yearly Package</h3>
+                <div class="price">₹ 9000</div>
+                <p>Complete Syllabus + Test Series</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Apply for Admission</h2>
+        <input id="sname" placeholder="Student Full Name">
+        <input id="smobile" type="tel" placeholder="Parent's Mobile Number">
+        <select id="sclass">
+            <option>Class 9</option>
+            <option>Class 10</option>
+        </select>
+        <button onclick="addStudent()">SUBMIT APPLICATION</button>
+    </div>
+
+    <div class="section">
+        <h2>Quick Online Payment</h2>
+        <select id="payType" onchange="updateAmount()">
+            <option value="3500">Monthly Fees (₹3500)</option>
+            <option value="9000">Yearly Fees (₹9000)</option>
+        </select>
+        <div class="payment-info">Amount: ₹ <span id="payAmount">3500</span></div>
+        <a id="upiLink" target="_blank">
+            <button style="background:#27ae60">PAY NOW (UPI)</button>
+        </a>
+        <div style="text-align:center; margin-top:20px;">
+            <img id="qrImage" style="max-width:200px; border:4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Admin Portal</h2>
+        <input type="password" id="adminPass" placeholder="Enter Admin Password">
+        <button onclick="login()" style="background:#34495e;">Login to Dashboard</button>
+    </div>
+
+    <div class="section admin-panel" id="adminPanel">
+        <h2>Control Panel</h2>
+        <label>Institute Name:</label>
+        <input id="editName">
+        <label>Location:</label>
+        <input id="editLocation">
+        <label>UPI ID:</label>
+        <input id="editUPI">
+        <label>Subjects (Comma separated):</label>
+        <textarea id="editSubjects" rows="3"></textarea>
+        <label>Upload QR Code Image:</label>
+        <input type="file" onchange="uploadQR(event)">
+        <button onclick="saveData()">SAVE ALL UPDATES</button>
+
+        <h3>📋 Admission Records</h3>
+        <table>
+            <thead><tr><th>Student Name</th><th>Mobile</th><th>Class</th></tr></thead>
+            <tbody id="studentTable"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<footer>
+    <h3>Jhaji Coaching Institute</h3>
+    <p>Address: Bounsi, Bihar – Banka, Bihar</p>
+    <p>Contact: 7319965930 | Email: info@jhajicoaching.com</p>
+    <hr style="width:50%; opacity:0.2; margin: 20px auto;">
+    <p>© 2026 Jhaji Coaching - Quality Education</p>
+</footer>
+
+<script>
+const ADMIN_HASH="cmFuZGkxMQ=="; // Pass: randi11
+
+function loadData(){
+ siteName.innerText = localStorage.n || "Jhaji Coaching Institute";
+ location.innerText = localStorage.l || "Bounsi, Bihar – Banka, Bihar";
+ if(localStorage.qr) qrImage.src = localStorage.qr;
+
+ // Load Subjects
+ let subs = localStorage.subjects || "Mathematics, Science, English, Social Science, Hindi";
+ let subArray = subs.split(",");
+ subjectsDisplay.innerHTML = "";
+ subArray.forEach(s => {
+    subjectsDisplay.innerHTML += `<div class="subject-card">${s.trim()}</div>`;
+ });
+
+ loadStudents();
+ updateAmount();
+}
+
+function login(){
+ if(btoa(adminPass.value) === ADMIN_HASH){
+  adminPanel.style.display = "block";
+  editName.value = siteName.innerText;
+  editLocation.value = location.innerText;
+  editUPI.value = localStorage.upi || "";
+  editSubjects.value = localStorage.subjects || "Mathematics, Science, English, Social Science, Hindi";
+ } else { alert("Access Denied!"); }
+}
+
+function saveData(){
+ localStorage.n = editName.value;
+ localStorage.l = editLocation.value;
+ localStorage.upi = editUPI.value;
+ localStorage.subjects = editSubjects.value;
+ loadData();
+ alert("Website Updated Successfully!");
+}
+
+function updateAmount(){
+ let amt = payType.value;
+ payAmount.innerText = amt;
+ let upi = localStorage.upi || "jhaji@upi";
+ upiLink.href = `upi://pay?pa=${upi}&am=${amt}&cu=INR&tn=Coaching_Fees`;
+}
+
+function addStudent(){
+ let name = sname.value;
+ let mob = smobile.value;
+ if(!name || !mob) return alert("Please fill all details!");
+ let data = JSON.parse(localStorage.students || "[]");
+ data.push({n: name, m: mob, c: sclass.value});
+ localStorage.students = JSON.stringify(data);
+ sname.value = ""; smobile.value = "";
+ loadStudents();
+ alert("Admission Form Submitted! We will contact you soon.");
+}
+
+function loadStudents(){
+ let data = JSON.parse(localStorage.students || "[]");
+ studentTable.innerHTML = data.map(s => `<tr><td>${s.n}</td><td>${s.m}</td><td>${s.c}</td></tr>`).join("");
+}
+
+function uploadQR(e){
+ let r = new FileReader();
+ r.onload = () => { qrImage.src = r.result; localStorage.qr = r.result; };
+ r.readAsDataURL(e.target.files[0]);
+}
+
+window.onload = loadData;
+</script>
+
+</body>
+</html>
